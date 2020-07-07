@@ -42,6 +42,10 @@ def add():
 
 
 def update():
+    title = input("Which title would you like to mark as 'read'? ")
+    confirm = input(f"You will be updating {title}.  Is this ok? (y/n) ")
+    if confirm == "y":
+        operations.update_book(title)
     repeat()
 
 

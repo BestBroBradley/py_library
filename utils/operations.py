@@ -21,19 +21,26 @@ def add_book(title, author):
 def delete_book(title):
     library = open_file()
     index = 0
-    for item in library:
-        if item["title"] == title:
-            library.pop(index)
-        index += 1
-    print(library)
-    write_file(library)
+    if title in library:
+        for item in library:
+            if item["title"] == title:
+                library.pop(index)
+            index += 1
+        write_file(library)
+        print("Successfully update")
+    else:
+        print("Title not in library.")
 
 
 def update_book(title):
     library = open_file()
+    success = False
     for item in library:
         if item["title"] == title:
             item["is_read"] = True
-    print(library)
+            success = True
     write_file(library)
-
+    if success:
+        print("Successfully updated.")
+    else:
+        print("Title not in library")

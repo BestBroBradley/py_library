@@ -1,1 +1,1 @@
-[{"title": "Holes", "author": "Louis Sachar", "is_read": false}, {"title": "Deerskin", "author": "Robin McKinley", "is_read": false}]
+[{"title": "Holes", "author": "Louis Sachar", "is_read": true}, {"title": "Deerskin", "author": "Robin McKinley", "is_read": true}]
