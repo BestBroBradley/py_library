@@ -25,6 +25,12 @@ def initiate():
     switchboard[selection]()
 
 
+def view():
+    library = operations.open_file()
+    print(library)
+    repeat()
+
+
 def add():
     title = input("What title would you like to add? ")
     author = input(f"Who wrote {title}? ")
@@ -35,14 +41,29 @@ def add():
     repeat()
 
 
+def update():
+    repeat()
+
+
+def delete():
+    repeat()
+
+
 def repeat():
     selection = input(menu)
     switchboard[selection]()
 
 
+def leave():
+    print(goodbye)
+
+
 switchboard = {
-    "view": operations.open_file,
-    "add": add
+    "view": view,
+    "add": add,
+    "delete": delete,
+    "update": update,
+    "exit": leave
 }
 
 initiate()
