@@ -50,6 +50,10 @@ def update():
 
 
 def delete():
+    title = input("Which title would you like to delete? ")
+    confirm = input(f"You will be deleting {title}. Is this ok? (y/n) ")
+    if confirm == "y":
+        operations.delete_book(title)
     repeat()
 
 
