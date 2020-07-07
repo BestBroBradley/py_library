@@ -29,7 +29,11 @@ def delete_book(title):
     write_file(library)
 
 
-
 def update_book(title):
-    pass
+    library = open_file()
+    for item in library:
+        if item["title"] == title:
+            item["is_read"] = True
+    print(library)
+    write_file(library)
 

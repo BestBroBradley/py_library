@@ -1,1 +1,1 @@
-[]
+[{"title": "Holes", "author": "Louis Sachar", "is_read": true}, {"title": "Holes", "author": "Louis Sachar", "is_read": true}, {"title": "Holes", "author": "Louis Sachar", "is_read": false}]
