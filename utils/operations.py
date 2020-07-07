@@ -14,13 +14,20 @@ def write_file(library):
 
 def add_book(title, author):
     library = open_file()
-    print(library)
     library.append({"title": title, "author": author, "is_read": False})
     write_file(library)
 
 
 def delete_book(title):
-    pass
+    library = open_file()
+    index = 0
+    for item in library:
+        if item["title"] == title:
+            library.pop(index)
+        index += 1
+    print(library)
+    write_file(library)
+
 
 
 def update_book(title):
