@@ -5,10 +5,21 @@ def create_file():
     connection = sqlite3.connect("data.db")
     cursor = connection.cursor()
 
-    cursor.execute("CREATE TABLE IF NOT EXISTS library(name text primary key, author text, read integer)")
+    cursor.execute("CREATE TABLE IF NOT EXISTS library(title text primary key, author text, read integer)")
 
     connection.commit()
     connection.close()
+
+
+def view_all():
+    connection = sqlite3.connect("data.db")
+    cursor = connection.cursor()
+
+    cursor.execute("SELECT title, author FROM library")
+    library = [{'title': row[0], 'author': row[1]} for row in cursor.fetchall()]
+
+    connection.close()
+    return library
 
 
 def add_book(title, author):
@@ -22,7 +33,6 @@ def add_book(title, author):
 
 
 def delete_book(title):
-
 
     library = open_file()
     index = 0

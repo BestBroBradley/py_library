@@ -26,7 +26,7 @@ def initiate():
 
 
 def view():
-    library = operations.open_file()
+    library = operations.view_all()
     print(library)
     repeat()
 
