@@ -33,20 +33,19 @@ def add_book(title, author):
 
 
 def delete_book(title):
+    connection = sqlite3.connect("data.db")
+    cursor = connection.cursor()
 
-    library = open_file()
-    index = 0
-    success = False
-    for item in library:
-        if item["title"] == title:
-            library.pop(index)
-            index += 1
-            success = True
-    write_file(library)
-    if success:
-        print("Successfully deleted.")
-    else:
-        print("Title not in library.")
+    cursor.execute(f"SELECT title, author FROM library WHERE title = '{title}'")
+    book = cursor.fetchone()
+    if book:
+        cursor.execute(f"DELETE FROM library WHERE title = '{title}'")
+
+        connection.commit()
+        connection.close()
+        return print("Successfully deleted.")
+    connection.close()
+    return print("Item not in library.")
 
 
 def update_book(title):
