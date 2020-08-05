@@ -15,8 +15,8 @@ def view_all():
     connection = sqlite3.connect("data.db")
     cursor = connection.cursor()
 
-    cursor.execute("SELECT title, author FROM library")
-    library = [{'title': row[0], 'author': row[1]} for row in cursor.fetchall()]
+    cursor.execute("SELECT title, author, read FROM library")
+    library = [{'title': row[0], 'author': row[1], 'read': row[2]} for row in cursor.fetchall()]
 
     connection.close()
     return library
@@ -49,17 +49,19 @@ def delete_book(title):
 
 
 def update_book(title):
-    library = open_file()
-    success = False
-    for item in library:
-        if item["title"] == title:
-            item["is_read"] = True
-            success = True
-    write_file(library)
-    if success:
-        print("Successfully updated.")
-    else:
-        print("Title not in library.")
+    connection = sqlite3.connect("data.db")
+    cursor = connection.cursor()
+
+    cursor.execute(f"SELECT title, author FROM library WHERE title = '{title}'")
+    book = cursor.fetchone()
+    if book:
+        cursor.execute(f"UPDATE library SET read = 1 WHERE title = '{title}'")
+
+        connection.commit()
+        connection.close()
+        return print("Successfully updated.")
+    connection.close()
+    return print("Item not in library.")
 
 
 create_file()
