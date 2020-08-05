@@ -1,4 +1,14 @@
-import json
+import sqlite3
+
+
+def create_file():
+    connection = sqlite3.connect("data.db")
+    cursor = connection.cursor()
+
+    cursor.execute("CREATE TABLE library(name text, author text, read integer)")
+
+    connection.commit()
+    connection.close()
 
 
 def open_file():
