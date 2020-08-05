@@ -5,30 +5,25 @@ def create_file():
     connection = sqlite3.connect("data.db")
     cursor = connection.cursor()
 
-    cursor.execute("CREATE TABLE library(name text, author text, read integer)")
+    cursor.execute("CREATE TABLE IF NOT EXISTS library(name text primary key, author text, read integer)")
 
     connection.commit()
     connection.close()
 
 
-def open_file():
-    with open("utils/library.txt", "r") as file:
-        library = json.load(file)
-    return library
-
-
-def write_file(library):
-    with open("utils/library.txt", "w") as file:
-        json.dump(library, file)
-
-
 def add_book(title, author):
-    library = open_file()
-    library.append({"title": title, "author": author, "is_read": False})
-    write_file(library)
+    connection = sqlite3.connect("data.db")
+    cursor = connection.cursor()
+
+    cursor.execute("INSERT INTO library VALUES (?, ?, 0)", (title, author))
+
+    connection.commit()
+    connection.close()
 
 
 def delete_book(title):
+
+
     library = open_file()
     index = 0
     success = False
@@ -56,3 +51,6 @@ def update_book(title):
         print("Successfully updated.")
     else:
         print("Title not in library.")
+
+
+create_file()
