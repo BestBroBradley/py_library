@@ -36,10 +36,10 @@ def delete_book(title):
     connection = sqlite3.connect("data.db")
     cursor = connection.cursor()
 
-    cursor.execute(f"SELECT title, author FROM library WHERE title = '{title}'")
+    cursor.execute("SELECT title, author FROM library WHERE title = ?", (title,))
     book = cursor.fetchone()
     if book:
-        cursor.execute(f"DELETE FROM library WHERE title = '{title}'")
+        cursor.execute("DELETE FROM library WHERE title = ?", (title,))
 
         connection.commit()
         connection.close()
@@ -52,10 +52,10 @@ def update_book(title):
     connection = sqlite3.connect("data.db")
     cursor = connection.cursor()
 
-    cursor.execute(f"SELECT title, author FROM library WHERE title = '{title}'")
+    cursor.execute("SELECT title, author FROM library WHERE title = ?", (title,))
     book = cursor.fetchone()
     if book:
-        cursor.execute(f"UPDATE library SET read = 1 WHERE title = '{title}'")
+        cursor.execute("UPDATE library SET read = 1 WHERE title = ?", (title,))
 
         connection.commit()
         connection.close()

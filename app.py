@@ -27,12 +27,15 @@ def initiate():
 
 def view():
     library = operations.view_all()
-    for book in library:
-        if book["read"]:
-            book["read"] = "yes"
-        else:
-            book["read"] = "no"
+    if library:
+        for book in library:
+            if book["read"]:
+                book["read"] = "yes"
+            else:
+                book["read"] = "no"
         print(f"Title: {book['title']} | Author: {book['author']} | Read? {book['read']}")
+    else:
+        print("No titles in library.")
     repeat()
 
 
