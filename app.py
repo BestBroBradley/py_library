@@ -33,7 +33,7 @@ def view():
                 book["read"] = "yes"
             else:
                 book["read"] = "no"
-        print(f"Title: {book['title']} | Author: {book['author']} | Read? {book['read']}")
+            print(f"Title: {book['title']} | Author: {book['author']} | Read? {book['read']}")
     else:
         print("No titles in library.")
     repeat()
@@ -44,8 +44,11 @@ def add():
     author = input(f"Who wrote {title}? ").title()
     confirm = input(f"{title} by {author} will be added to your library.  Is this ok? (y/n) ")
     if confirm.lower() == "y":
-        operations.add_book(title, author)
-        print("Added to library!")
+        result = operations.add_book(title, author)
+        if result:
+            print("Added to library!")
+        else:
+            print("Item already in library.")
     repeat()
 
 

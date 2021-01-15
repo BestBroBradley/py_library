@@ -22,7 +22,13 @@ def add_book(title, author):
     with DatabaseConnection('data.db') as connection:
         cursor = connection.cursor()
 
-        cursor.execute("INSERT INTO library VALUES (?, ?, 0)", (title, author))
+        cursor.execute("SELECT title FROM library WHERE title = ?", (title,))
+        inlibrary = cursor.fetchall()
+        if inlibrary:
+            return 0
+        else:
+            cursor.execute("INSERT INTO library VALUES (?, ?, 0)", (title, author))
+            return 1
 
 
 def delete_book(title):
